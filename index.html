@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Lab3</title>
+  <link rel="stylesheet" href="jquery-ui.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="jquery-ui.css" rel="stylesheet">
+  <style>
+  button{
+    width: 100px;
+    height: 25px;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 20px;
+    outline: none;
+    box-shadow: 0 0 7px #666;
+  }
+  img {
+  display: none;
+  height: 100px;
+  width: 200px;
+}
+
+.slide-wrap {
+
+  width: 100px;
+  height: 100px;
+}
+
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+  <h1>Завдання 1</h1>
+  <div id="wrapper">
+    <h3>Перше поле</h3>
+      <input id="input1" type="text" name="" value="">
+  </div>
+
+
+
+  <h1>Завдання 2</h1>
+  <div>
+    <button id="go">Старт</button>
+    <button id="stop">Стоп</button>
+  </div>
+  <div class='slide-wrap'>
+    <img class='slide' src="https://debati.bg/wp-content/uploads/2018/04/Avengers-Infinity-War-poster.jpg">
+  </div>
+  <div class='slide-wrap'>
+    <img class='slide' src="https://www.mirf.ru/wp-content/uploads/2015/12/Homepage21.jpg">
+  </div>
+
+
+
+
+  <h1>Завдання 3</h1>
+    <button id="show" type="button" class="button" name="button">Показати</button>
+    <button id="hide" type="button" class="button" name="button">Заховати</button>
+
+    <div id="hiden">
+
+
+    <div id="div1" class="">
+      <h3>Перший Div</h3>
+    </div>
+    <div id="div2" class="">
+      <h3>Другий Div</h3>
+    </div>
+    <div id="div3" class="">
+      <h3>Третій Div</h3>
+    </div>
+    <div id="div4" class="">
+      <h3>Четвертий Div</h3>
+    </div>
+    <div id="div5" class="">
+      <h3>П'ятий Div</h3>
+    </div>
+    </div>
+
+  <script>
+// Перше Завдання
+var z = 0;
+$( "#input1" ).keypress(function() {
+$(this).css('background-color', randColor());
+if (z == 0) {
+  $('#wrapper').append('<h3>Друге поле</h3><input id="input1" type="text" name="" value="">');
+z=z+1;
+}
+})
+function randColor(){
+    let rand = () => Math.floor(Math.random() * (255 + 1 - 0) + 0);
+    return `rgb(${rand()},${rand()},${rand()})`;
+}
+
+// Друге Завдання
+var timer;
+var index = 0;
+
+$('#go').click(function() {
+  var img = $('.slide');
+  slide();
+
+  function slide() {
+    img.stop().fadeOut(500).eq(index).stop().fadeIn(500);
+    index = index < img.length - 1 ? index + 1 : 0;
+    clearTimeout(timer);
+    timer = setTimeout(slide, 2000)
+  }
+})
+$('#stop').click(function() {
+  clearTimeout(timer);
+  index = 0;
+  $('.slide').stop().fadeIn();
+})
+// Третє завдання
+  $("#hiden").hide();
+  $('#show').click(function() {
+
+    var z = 0;
+    z = Math.floor((Math.random() * 5) + 1);
+
+  if (z==1) {
+    $("#div2").hide();
+    $("#div3").hide();
+    $("#div4").hide();
+    $("#div5").hide();
+
+    $("#div1").show("fade",3000);
+    $("#hiden").show();
+
+  }
+  if (z==2) {
+    $("#div1").hide();
+    $("#div3").hide();
+    $("#div4").hide();
+    $("#div5").hide();
+
+    $("#div2").show("fade",3000);
+        $("#hiden").show();
+
+
+  }
+  if (z==3) {
+    $("#div1").hide();
+    $("#div2").hide();
+    $("#div4").hide();
+    $("#div5").hide();
+
+      $("#div3").show("fade",3000);
+          $("#hiden").show();
+
+  }
+  if (z==4) {
+    $("#div5").hide();
+    $("#div1").hide();
+    $("#div2").hide();
+    $("#div3").hide();
+
+  $("#div4").show("fade",3000);
+      $("#hiden").show();
+
+  }
+
+  if (z==5) {
+    $("#div1").hide();
+    $("#div2").hide();
+    $("#div3").hide();
+    $("#div4").hide();
+
+    $("#div5").show("fade",3000);
+      $("#hiden").show();
+
+  }
+
+
+  })
+
+
+  $('#hide').click(function() {
+  $("#hiden").hide();
+  })
+
+  </script>
+
+</body>
+
+</html>
